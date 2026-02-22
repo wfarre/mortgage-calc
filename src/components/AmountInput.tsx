@@ -1,4 +1,5 @@
 import React from "react";
+import { formatter } from "../utils/utils";
 
 type Props = {
   label: string;
@@ -10,9 +11,17 @@ type Props = {
   unitRight?: string;
 };
 
-const NumberInput = (props: Props) => {
+const AmountInput = (props: Props) => {
+  const [displayValue, setDisplayValue] = React.useState(props.value || "");
+
+  const formatValue = (val: string) =>
+    formatter
+      .format(Number(val || 0))
+      .replace("£", "")
+      .replace(".00", "");
+
   return (
-    <div className="w-full">
+    <div>
       <label className="flex flex-col text-slate-500 mb-3" htmlFor={props.id}>
         {props.label}
       </label>
@@ -21,21 +30,21 @@ const NumberInput = (props: Props) => {
           <p className="px-4 py-3 bg-slate-100">{props.unitLeft}</p>
         )}
         <input
-          type="number"
+          type="text"
           inputMode="decimal"
           min={0}
-          max={props.max}
+          max={props.max ?? undefined}
           id={props.id}
           className="w-full text-slate-900 font-bold py-3 px-4"
-          value={props.value}
+          value={displayValue}
           onChange={(e) => {
             const val = e.target.value;
-            if (props.max && +val > props.max) {
-              props.onChange(String(props.max));
-              return;
-            }
+            if (isNaN(+val) && val !== ".") return;
+            setDisplayValue(val);
             if (!isNaN(+val)) props.onChange(val);
           }}
+          onFocus={() => setDisplayValue("")}
+          onBlur={() => setDisplayValue(formatValue(props.value || ""))}
         />
         {props.unitRight && (
           <p className="px-4 py-3 bg-slate-100">{props.unitRight}</p>
@@ -45,4 +54,4 @@ const NumberInput = (props: Props) => {
   );
 };
 
-export default NumberInput;
+export default AmountInput;
