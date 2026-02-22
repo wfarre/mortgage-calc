@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lime-custom: hsl(61, 70%, 52%);
+}
+
+body {
+  background-color: hsl(202, 86%, 94%);
+}
