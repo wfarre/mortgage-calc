@@ -19,9 +19,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center sm:p-10 font-sans">
-      <div className=" flex flex-col md:flex-row bg-white sm:rounded-3xl overflow-hidden max-w-252">
+      <div className=" flex flex-col md:flex-row bg-white sm:rounded-3xl overflow-hidden max-w-252 drop-shadow-2xl">
         <section className="p-6 sm:p-10 flex-1">
-          <header className="flex justify-between items-center mb-10 flex-wrap">
+          <header className="flex justify-between items-center mb-10 flex-wrap h-7.5">
             <h1 className="text-2xl font-bold">Mortgage Calculator</h1>
             <button
               onClick={handleReset}

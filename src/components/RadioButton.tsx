@@ -22,12 +22,14 @@ const RadioButton = (props: Props) => {
       />
       <label
         htmlFor={props.id}
-        className={`flex w-full items-center cursor-pointer text-slate-900 p-2 border rounded-lg hover:bg-gray-100 ${
-          props.checked ? "border-lime-custom bg-lime-custom/15" : ""
+        className={`flex w-full items-center cursor-pointer text-slate-900 px-4 h-12 border rounded-lg hover:bg-gray-100 font-bold text-lg ${
+          props.checked
+            ? "border-lime-custom bg-lime-custom/15"
+            : "border-slate-500"
         }`}
       >
         <span
-          className={`w-5 h-5 border-2 rounded-full mr-2 flex items-center justify-center ${
+          className={`w-[19.5px] h-[19.5px] border-2 rounded-full mr-2 flex items-center justify-center ${
             props.checked ? "border-lime-custom" : "border-slate-500"
           }`}
         >

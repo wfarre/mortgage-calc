@@ -11,8 +11,11 @@ type Props = {
 };
 
 const AmountInput = (props: Props) => {
+  const [isFocused, setIsFocused] = React.useState(false);
   const formatValue = (val: string) =>
-    val === "" ? "" : formatter.format(Number(val)).replace("£", "").replace(".00", "");
+    val === ""
+      ? ""
+      : formatter.format(Number(val)).replace("£", "").replace(".00", "");
 
   const [displayValue, setDisplayValue] = React.useState(
     formatValue(props.value || ""),
@@ -24,11 +27,11 @@ const AmountInput = (props: Props) => {
         {props.label}
       </label>
       <div
-        className={`border ${props.error ? "border-red-500" : "border-slate-500"} flex rounded-sm overflow-hidden`}
+        className={`border ${isFocused ? "border-lime-custom" : props.error ? "border-red-500" : "border-slate-500"} flex rounded-sm overflow-hidden`}
       >
         {props.unit && (
           <p
-            className={`px-4 py-3 ${props.error ? "bg-red-500 text-white" : "bg-slate-100"}`}
+            className={`px-4 h-12 flex items-center justify-center font-bold ${isFocused ? "bg-lime-custom" : props.error ? "bg-red-500 text-white" : "bg-slate-100 text-slate-900"}`}
           >
             {props.unit}
           </p>
@@ -37,7 +40,7 @@ const AmountInput = (props: Props) => {
           type="text"
           inputMode="decimal"
           id={props.id}
-          className="w-full text-slate-900 font-bold py-3 px-4"
+          className="w-full text-slate-900 font-bold h-12 px-4 outline-none"
           value={displayValue}
           onChange={(e) => {
             const val = e.target.value;
@@ -45,8 +48,14 @@ const AmountInput = (props: Props) => {
             setDisplayValue(val);
             if (!isNaN(+val)) props.onChange(val);
           }}
-          onFocus={() => setDisplayValue("")}
-          onBlur={() => setDisplayValue(formatValue(props.value || ""))}
+          onFocus={() => {
+            setIsFocused(true);
+            setDisplayValue("");
+          }}
+          onBlur={() => {
+            setIsFocused(false);
+            setDisplayValue(formatValue(props.value || ""));
+          }}
         />
       </div>
       {props.error && (

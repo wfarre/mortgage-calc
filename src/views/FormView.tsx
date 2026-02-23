@@ -64,89 +64,95 @@ const FormView = (props: Props) => {
     );
   };
   return (
-    <form className="space-y-6">
-      <fieldset>
-        <AmountInput
-          label="Mortgage Amount"
-          id="amount"
-          unit="£"
-          value={mortgageAmount}
-          onChange={(value) => {
-            setError((prev) => ({ ...prev, mortgageAmount: false }));
-            setMortgageAmount(value);
-          }}
-          error={error.mortgageAmount}
-        />
-      </fieldset>
+    <>
+      <form
+        className="space-y-6"
+        id="mortgage-form"
+        onSubmit={(e) => e.preventDefault()}
+      >
+        <fieldset>
+          <AmountInput
+            label="Mortgage Amount"
+            id="amount"
+            unit="£"
+            value={mortgageAmount}
+            onChange={(value) => {
+              setError((prev) => ({ ...prev, mortgageAmount: false }));
+              setMortgageAmount(value);
+            }}
+            error={error.mortgageAmount}
+          />
+        </fieldset>
 
-      <fieldset className="flex gap-5 flex-col sm:flex-row">
-        <NumberInput
-          label="Mortgage Term"
-          id="term"
-          unit="years"
-          max={100}
-          value={mortgageTerm}
-          onChange={(value) => {
-            setError((prev) => ({ ...prev, mortgageTerm: false }));
-            setMortgageTerm(value);
-          }}
-          error={error.mortgageTerm}
-        />
-        <NumberInput
-          label="Interest Rate"
-          id="rate"
-          max={100}
-          unit="%"
-          value={interestRate}
-          onChange={(value) => {
-            setError((prev) => ({ ...prev, interestRate: false }));
-            setInterestRate(value);
-          }}
-          error={error.interestRate}
-        />
-      </fieldset>
+        <fieldset className="flex gap-5 flex-col sm:flex-row">
+          <NumberInput
+            label="Mortgage Term"
+            id="term"
+            unit="years"
+            max={100}
+            value={mortgageTerm}
+            onChange={(value) => {
+              setError((prev) => ({ ...prev, mortgageTerm: false }));
+              setMortgageTerm(value);
+            }}
+            error={error.mortgageTerm}
+          />
+          <NumberInput
+            label="Interest Rate"
+            id="rate"
+            max={100}
+            unit="%"
+            value={interestRate}
+            onChange={(value) => {
+              setError((prev) => ({ ...prev, interestRate: false }));
+              setInterestRate(value);
+            }}
+            error={error.interestRate}
+          />
+        </fieldset>
 
-      <fieldset>
-        <legend className="pb-3 text-slate-500">Mortgage Type</legend>
-        <RadioButton
-          className="mb-2"
-          label="Repayment"
-          id="repayment"
-          name="type"
-          value="repayment"
-          checked={mortgageType === "repayment"}
-          onChange={() => {
-            setError((prev) => ({ ...prev, mortgageType: false }));
-            setMortgageType("repayment");
-          }}
-        />
-        <RadioButton
-          label="Interest Only"
-          id="interest-only"
-          name="type"
-          value="interest-only"
-          checked={mortgageType === "interest-only"}
-          onChange={() => {
-            setError((prev) => ({ ...prev, mortgageType: false }));
-            setMortgageType("interest-only");
-          }}
-        />
-        {error.mortgageType && (
-          <span className="text-red-500 mt-3 text-sm">
-            This field is required
-          </span>
-        )}
-      </fieldset>
-
+        <fieldset>
+          <legend className="pb-3 text-slate-500">Mortgage Type</legend>
+          <RadioButton
+            className="mb-2"
+            label="Repayment"
+            id="repayment"
+            name="type"
+            value="repayment"
+            checked={mortgageType === "repayment"}
+            onChange={() => {
+              setError((prev) => ({ ...prev, mortgageType: false }));
+              setMortgageType("repayment");
+            }}
+          />
+          <RadioButton
+            label="Interest Only"
+            id="interest-only"
+            name="type"
+            value="interest-only"
+            checked={mortgageType === "interest-only"}
+            onChange={() => {
+              setError((prev) => ({ ...prev, mortgageType: false }));
+              setMortgageType("interest-only");
+            }}
+          />
+          {error.mortgageType && (
+            <span className="text-red-500 mt-3 text-sm">
+              This field is required
+            </span>
+          )}
+        </fieldset>
+      </form>
       <button
+        form="motgage-form"
         type="button"
         onClick={calculateRepayments}
-        className="w-full flex items-center justify-center gap-3 sm:max-w-78.5 font-bold text-lg text-slate-900 py-4 bg-lime-custom rounded-4xl"
+        className="w-full flex items-center justify-center gap-3 sm:max-w-78.5 font-bold text-lg text-slate-900 h-14 bg-lime-custom rounded-4xl mt-10 cursor-pointer hover:bg-lime-custom/80 transition-colors"
       >
         <img src="/assets/images/icon-calculator.svg" alt="Calculator icon" />
         Calculate Repayments
       </button>
-    </form>
+    </>
   );
 };
 
