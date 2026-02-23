@@ -6,8 +6,8 @@ type Props = {
   value?: string;
   onChange: (value: string) => void;
   max?: number;
-  unitLeft?: string;
-  unitRight?: string;
+  unit?: string;
+  error?: boolean;
 };
 
 const NumberInput = (props: Props) => {
@@ -16,10 +16,9 @@ const NumberInput = (props: Props) => {
       <label className="flex flex-col text-slate-500 mb-3" htmlFor={props.id}>
         {props.label}
       </label>
-      <div className="border border-slate-500 flex rounded-sm overflow-hidden">
-        {props.unitLeft && (
-          <p className="px-4 py-3 bg-slate-100">{props.unitLeft}</p>
-        )}
+      <div
+        className={`border ${props.error ? "border-red-500" : "border-slate-500"} flex rounded-sm overflow-hidden`}
+      >
         <input
           type="number"
           inputMode="decimal"
@@ -37,10 +36,19 @@ const NumberInput = (props: Props) => {
             if (!isNaN(+val)) props.onChange(val);
           }}
         />
-        {props.unitRight && (
-          <p className="px-4 py-3 bg-slate-100">{props.unitRight}</p>
+        {props.unit && (
+          <p
+            className={`px-4 py-3 ${props.error ? "bg-red-500 text-white" : "bg-slate-100"}`}
+          >
+            {props.unit}
+          </p>
         )}
       </div>
+      {props.error && (
+        <span className="text-red-500 mt-3 text-sm">
+          This field is required
+        </span>
+      )}
     </div>
   );
 };
