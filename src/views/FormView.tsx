@@ -112,7 +112,7 @@ const FormView = (props: Props) => {
         </fieldset>
 
         <fieldset>
-          <legend className="pb-3 text-slate-500">Mortgage Type</legend>
+          <legend className="pb-3 text-slate-700">Mortgage Type</legend>
           <RadioButton
             className="mb-2"
             label="Repayment"

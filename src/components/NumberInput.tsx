@@ -15,7 +15,7 @@ const NumberInput = (props: Props) => {
 
   return (
     <div className="w-full">
-      <label className="flex flex-col text-slate-500 mb-3" htmlFor={props.id}>
+      <label className="flex flex-col text-slate-700 mb-3" htmlFor={props.id}>
         {props.label}
       </label>
       <div
