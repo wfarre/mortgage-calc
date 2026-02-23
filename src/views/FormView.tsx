@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AmountInput from "../components/AmountInput";
 import NumberInput from "../components/NumberInput";
 import RadioButton from "../components/RadioButton";

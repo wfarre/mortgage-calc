@@ -1,4 +1,3 @@
-import React from "react";
 type Props = {
   isResult: boolean;
   monthlyRepayment: string;
